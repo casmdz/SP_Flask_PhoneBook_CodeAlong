@@ -1,0 +1,127 @@
+fixing bugs 
+
+flask run
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Program Files\Python311\Scripts\flask.exe\__main__.py", line 7, in <module>
+  File "C:\Program Files\Python311\Lib\site-packages\flask\cli.py", line 1064, in main
+    cli.main()
+  File "C:\Program Files\Python311\Lib\site-packages\click\core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\click\decorators.py", line 92, in new_func
+    return ctx.invoke(f, obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\flask\cli.py", line 912, in run_command
+    raise e from None
+  File "C:\Program Files\Python311\Lib\site-packages\flask\cli.py", line 898, in run_command
+    app = info.load_app()
+          ^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\flask\cli.py", line 309, in load_app
+    app = locate_app(import_name, name)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\site-packages\flask\cli.py", line 219, in locate_app
+    __import__(module_name)
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\app\__init__.py", line 5, in <module>
+    from .api.routes import api
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\app\api\routes.py", line 2, in <module>      
+    from helpers import token_required
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\helpers.py", line 32, in <module>
+    class JSONEncoder(json.JSONEncoder):
+                      ^^^^^^^^^^^^^^^^
+AttributeError: module 'flask.json' has no attribute 'JSONEncoder'
+
+
+https://stackoverflow.com/questions/76107450/flask-attributeerror-module-flask-json-has-no-attribute-jsonencoder
+
+> 
+        Python has had a builtin JSONEncoder since at least 3.2, making Flask's version redundant. So it's reasonable to remove it.
+
+        If this was a module you controlled, you could just replace your line JSONEncoder = json.JSONEncoder with
+
+        from json import JSONEncoder
+
+        Since you don't control this library though, you should notice which library that is trying to include it, in your case that's flask_wtf. When you check PyPi for that library you'll see that there's a few recent releases, suggesting the first thing you should try is updating that version on Flask-WTF.
+
+> 
+        The solution I found is to uninstall Flask and install an older version.
+
+>
+        These attributes has been removed from flask version 2.3.0 see this release notes: https://flask.palletsprojects.com/en/2.3.x/changes/#version-2-3-0
+
+
+
+
+
+
+
+
+(my_venv) C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook>flask run
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Scripts\flask.exe\__main__.py", line 7, in <module>
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\flask\cli.py", line 1064, in main
+    cli.main()
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\click\core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\click\decorators.py", line 92, in new_func
+    return ctx.invoke(f, obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\flask\cli.py", line 912, in run_command
+    raise e from None
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\flask\cli.py", line 898, in run_command
+    app = info.load_app()
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\flask\cli.py", line 219, in locate_app    __import__(module_name)
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\app\__init__.py", line 26, in <module>       
+    root_db.init_app(app)
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\flask_sqlalchemy\extension.py", line 310, in init_app
+    raise RuntimeError(
+RuntimeError: Either 'SQLALCHEMY_DATABASE_URI' or 'SQLALCHEMY_BINDS' must be set.
+
+
+
+i dont even really know what i did. i copied the code agan for config.  and i added the package Zipp.
+
+
+
+================================================================
+
+
+flask db init, migrate, upgrade
+
+worked fine 
+
+================================================================
+
+
+  File "C:\Users\treeo\Desktop\CODING TEMPLE SELF PACE\Module 5 Flask\CodeAlong_PhoneBook\my_venv\Lib\site-packages\werkzeug\routing\map.py", line 950, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth.login'. Did you mean 'auth.signin' instead?
+127.0.0.1 - - [03/Sep/2023 02:56:41] "GET /profile HTTP/1.1" 500 -
